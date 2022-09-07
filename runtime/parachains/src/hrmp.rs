@@ -1069,7 +1069,7 @@ impl<T: Config> Pallet<T> {
 			// jokingly small number.
 			debug_assert!(false);
 		}
-
+		log::info!("------------------- init open channel -------------------");
 		Ok(())
 	}
 
@@ -1123,7 +1123,7 @@ impl<T: Config> Pallet<T> {
 			// jokingly small number.
 			debug_assert!(false);
 		}
-
+		log::info!("------------------- accept open channel -------------------");
 		Ok(())
 	}
 
