@@ -166,7 +166,6 @@ pub mod pallet {
 				max_message_size,
 			)?;
 			log::info!(target: "runtime", "----------------------------------------------- checking para_id: {:?}", sender);
-			println!("---------------------- sudo_establish_hrmp_channel init_open_channel ----------------------------");
 			log::info!("---------------------- sudo_establish_hrmp_channel init_open_channel ----------------------------");
 			<hrmp::Pallet<T>>::accept_open_channel(recipient, sender)?;
 			log::info!("---------------------- sudo_establish_hrmp_channel accept_open_channel ----------------------------");
