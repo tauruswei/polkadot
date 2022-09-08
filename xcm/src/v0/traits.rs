@@ -151,6 +151,7 @@ pub trait ExecuteXcm<Call> {
 			message,
 			weight_limit,
 		);
+		log::info!("--------------------- execute_xcm v0 ---------------------");
 		Self::execute_xcm_in_credit(origin, message, weight_limit, 0)
 	}
 

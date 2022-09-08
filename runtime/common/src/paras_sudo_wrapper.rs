@@ -77,6 +77,7 @@ pub mod pallet {
 			genesis: ParaGenesisArgs,
 		) -> DispatchResult {
 			ensure_root(origin)?;
+			log::info!("---------------------- sudo_schedule_para_initialize ----------------------------");
 			runtime_parachains::schedule_para_initialize::<T>(id, genesis)
 				.map_err(|_| Error::<T>::ParaAlreadyExists)?;
 			Ok(())
@@ -165,7 +166,6 @@ pub mod pallet {
 				max_capacity,
 				max_message_size,
 			)?;
-			log::info!(target: "runtime", "----------------------------------------------- checking para_id: {:?}", sender);
 			log::info!("---------------------- sudo_establish_hrmp_channel init_open_channel ----------------------------");
 			<hrmp::Pallet<T>>::accept_open_channel(recipient, sender)?;
 			log::info!("---------------------- sudo_establish_hrmp_channel accept_open_channel ----------------------------");
