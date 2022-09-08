@@ -47,6 +47,7 @@ impl ShouldExecute for Tuple {
 		max_weight: Weight,
 		weight_credit: &mut Weight,
 	) -> Result<(), ()> {
+		log::info!("++++++++++++++++++++++++++ shouldexecute ++++++++++++++++++");
 		for_tuples!( #(
 			match Tuple::should_execute(origin, message, max_weight, weight_credit) {
 				Ok(()) => return Ok(()),

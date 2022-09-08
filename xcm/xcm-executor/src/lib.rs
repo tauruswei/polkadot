@@ -74,7 +74,7 @@ impl<Config: config::Config> ExecuteXcm<Config::Call> for XcmExecutor<Config> {
 	) -> Outcome {
 		let origin = origin.into();
 		log::info!("====================== execute_xcm_in_credit =====================");
-		log::trace!(
+		log::info!(
 			target: "xcm::execute_xcm_in_credit",
 			"origin: {:?}, message: {:?}, weight_limit: {:?}, weight_credit: {:?}",
 			origin,
