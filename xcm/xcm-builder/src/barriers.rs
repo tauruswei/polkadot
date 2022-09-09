@@ -40,8 +40,10 @@ impl ShouldExecute for TakeWeightCredit {
 			"TakeWeightCredit origin: {:?}, message: {:?}, max_weight: {:?}, weight_credit: {:?}",
 			_origin, _message, max_weight, weight_credit,
 		);
-		log::info!("======================= TakeWeightCredit::should_execute ========================");
+		log::info!("======================= TakeWeightCredit::should_execute 1 ========================");
 		*weight_credit = weight_credit.checked_sub(max_weight).ok_or(())?;
+		log::info!("======================= TakeWeightCredit::should_execute 2 ========================");
+
 		Ok(())
 	}
 }
@@ -64,8 +66,9 @@ impl<T: Contains<MultiLocation>> ShouldExecute for AllowTopLevelPaidExecutionFro
 			"AllowTopLevelPaidExecutionFrom origin: {:?}, message: {:?}, max_weight: {:?}, weight_credit: {:?}",
 			origin, message, max_weight, _weight_credit,
 		);
-		log::info!("======================= AllowTopLevelPaidExecutionFrom::should_execute ========================");
+		log::info!("======================= AllowTopLevelPaidExecutionFrom::should_execute 1 ========================");
 		ensure!(T::contains(origin), ());
+		log::info!("======================= AllowTopLevelPaidExecutionFrom::should_execute 2 ========================");
 		let mut iter = message.0.iter_mut();
 		let i = iter.next().ok_or(())?;
 		match i {
@@ -108,9 +111,12 @@ impl<T: Contains<MultiLocation>> ShouldExecute for AllowUnpaidExecutionFrom<T> {
 			"AllowUnpaidExecutionFrom origin: {:?}, message: {:?}, max_weight: {:?}, weight_credit: {:?}",
 			origin, _message, _max_weight, _weight_credit,
 		);
-		log::info!("======================= AllowUnpaidExecutionFrom::should_execute ========================");
+		log::info!("======================= AllowUnpaidExecutionFrom::should_execute 1 ========================");
 
 		ensure!(T::contains(origin), ());
+
+		log::info!("======================= AllowUnpaidExecutionFrom::should_execute 2 ========================");
+
 		Ok(())
 	}
 }
