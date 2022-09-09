@@ -40,6 +40,7 @@ impl ShouldExecute for TakeWeightCredit {
 			"TakeWeightCredit origin: {:?}, message: {:?}, max_weight: {:?}, weight_credit: {:?}",
 			_origin, _message, max_weight, weight_credit,
 		);
+		log::info!("======================= TakeWeightCredit::should_execute ========================");
 		*weight_credit = weight_credit.checked_sub(max_weight).ok_or(())?;
 		Ok(())
 	}
@@ -63,6 +64,7 @@ impl<T: Contains<MultiLocation>> ShouldExecute for AllowTopLevelPaidExecutionFro
 			"AllowTopLevelPaidExecutionFrom origin: {:?}, message: {:?}, max_weight: {:?}, weight_credit: {:?}",
 			origin, message, max_weight, _weight_credit,
 		);
+		log::info!("======================= AllowTopLevelPaidExecutionFrom::should_execute ========================");
 		ensure!(T::contains(origin), ());
 		let mut iter = message.0.iter_mut();
 		let i = iter.next().ok_or(())?;
@@ -106,6 +108,8 @@ impl<T: Contains<MultiLocation>> ShouldExecute for AllowUnpaidExecutionFrom<T> {
 			"AllowUnpaidExecutionFrom origin: {:?}, message: {:?}, max_weight: {:?}, weight_credit: {:?}",
 			origin, _message, _max_weight, _weight_credit,
 		);
+		log::info!("======================= AllowUnpaidExecutionFrom::should_execute ========================");
+
 		ensure!(T::contains(origin), ());
 		Ok(())
 	}
@@ -137,6 +141,8 @@ impl<ResponseHandler: OnResponse> ShouldExecute for AllowKnownQueryResponses<Res
 			"AllowKnownQueryResponses origin: {:?}, message: {:?}, max_weight: {:?}, weight_credit: {:?}",
 			origin, message, _max_weight, _weight_credit,
 		);
+		log::info!("======================= AllowKnownQueryResponses::should_execute ========================");
+
 		match message.0.first() {
 			Some(QueryResponse { query_id, .. })
 				if ResponseHandler::expecting_response(origin, *query_id) =>
@@ -161,6 +167,8 @@ impl<T: Contains<MultiLocation>> ShouldExecute for AllowSubscriptionsFrom<T> {
 			"AllowSubscriptionsFrom origin: {:?}, message: {:?}, max_weight: {:?}, weight_credit: {:?}",
 			origin, message, _max_weight, _weight_credit,
 		);
+		log::info!("======================= AllowSubscriptionsFrom::should_execute ========================");
+
 		ensure!(T::contains(origin), ());
 		match (message.0.len(), message.0.first()) {
 			(1, Some(SubscribeVersion { .. })) | (1, Some(UnsubscribeVersion)) => Ok(()),
