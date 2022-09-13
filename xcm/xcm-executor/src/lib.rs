@@ -129,7 +129,7 @@ impl<Config: config::Config> ExecuteXcm<Config::Call> for XcmExecutor<Config> {
 
 		while !message.0.is_empty() {
 			let result = vm.execute(message);
-			log::log!(target: "xcm::execute_xcm_in_credit", "result: {:?}", result);
+			log::info!(target: "xcm::execute_xcm_in_credit", "result: {:?}", result);
 			message = if let Err(error) = result {
 				vm.total_surplus.saturating_accrue(error.weight);
 				vm.error = Some((error.index, error.xcm_error));
