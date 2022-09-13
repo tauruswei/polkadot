@@ -200,6 +200,7 @@ impl<Config: config::Config> XcmExecutor<Config> {
 			match &mut result {
 				r @ Ok(()) =>
 					if let Err(e) = self.process_instruction(instr) {
+						log::info!("+++++++++++++++++++++++++ execute error +++++++++++++++++++++");
 						*r = Err(ExecutorError { index: i as u32, xcm_error: e, weight: 0 });
 					},
 				Err(ref mut error) =>
@@ -505,9 +506,18 @@ impl<Config: config::Config> XcmExecutor<Config> {
 				Config::SubscriptionService::stop(origin)
 			},
 			ExchangeAsset { .. } => Err(XcmError::Unimplemented),
-			HrmpNewChannelOpenRequest { .. } => Err(XcmError::Unimplemented),
-			HrmpChannelAccepted { .. } => Err(XcmError::Unimplemented),
-			HrmpChannelClosing { .. } => Err(XcmError::Unimplemented),
+			HrmpNewChannelOpenRequest { .. } => {
+				log::info!("++++++++++++++++++++++++++ HrmpNewChannelOpenRequest ++++++++++++++++++++++++++++");
+				Err(XcmError::Unimplemented)
+			},
+			HrmpChannelAccepted { .. } => {
+				log::info!("++++++++++++++++++++++++++ HrmpNewChannelOpenRequest ++++++++++++++++++++++++++++");
+				Err(XcmError::Unimplemented)
+			},
+			HrmpChannelClosing { .. } => {
+				log::info!("++++++++++++++++++++++++++ HrmpNewChannelOpenRequest ++++++++++++++++++++++++++++");
+				Err(XcmError::Unimplemented)
+			},
 		}
 	}
 
