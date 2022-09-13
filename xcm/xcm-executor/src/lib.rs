@@ -196,6 +196,7 @@ impl<Config: config::Config> XcmExecutor<Config> {
 		);
 		let mut result = Ok(());
 		for (i, instr) in xcm.0.into_iter().enumerate() {
+			log::info!("+++++++++++++++++++++++++ execute +++++++++++++++++++++");
 			match &mut result {
 				r @ Ok(()) =>
 					if let Err(e) = self.process_instruction(instr) {
@@ -271,6 +272,7 @@ impl<Config: config::Config> XcmExecutor<Config> {
 
 	/// Process a single XCM instruction, mutating the state of the XCM virtual machine.
 	fn process_instruction(&mut self, instr: Instruction<Config::Call>) -> Result<(), XcmError> {
+		log::info!("+++++++++++++++++++++++++ process_instruction +++++++++++++++++++++");
 		match instr {
 			WithdrawAsset(assets) => {
 				// Take `assets` from the origin account (on-chain) and place in holding.

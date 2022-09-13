@@ -35,7 +35,7 @@ impl ShouldExecute for TakeWeightCredit {
 		max_weight: Weight,
 		weight_credit: &mut Weight,
 	) -> Result<(), ()> {
-		log::trace!(
+		log::log!(
 			target: "xcm::barriers",
 			"TakeWeightCredit origin: {:?}, message: {:?}, max_weight: {:?}, weight_credit: {:?}",
 			_origin, _message, max_weight, weight_credit,
@@ -61,7 +61,7 @@ impl<T: Contains<MultiLocation>> ShouldExecute for AllowTopLevelPaidExecutionFro
 		max_weight: Weight,
 		_weight_credit: &mut Weight,
 	) -> Result<(), ()> {
-		log::trace!(
+		log::log!(
 			target: "xcm::barriers",
 			"AllowTopLevelPaidExecutionFrom origin: {:?}, message: {:?}, max_weight: {:?}, weight_credit: {:?}",
 			origin, message, max_weight, _weight_credit,
@@ -106,7 +106,7 @@ impl<T: Contains<MultiLocation>> ShouldExecute for AllowUnpaidExecutionFrom<T> {
 		_max_weight: Weight,
 		_weight_credit: &mut Weight,
 	) -> Result<(), ()> {
-		log::trace!(
+		log::info!(
 			target: "xcm::barriers",
 			"AllowUnpaidExecutionFrom origin: {:?}, message: {:?}, max_weight: {:?}, weight_credit: {:?}",
 			origin, _message, _max_weight, _weight_credit,
