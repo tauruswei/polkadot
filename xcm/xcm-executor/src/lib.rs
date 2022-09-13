@@ -139,7 +139,7 @@ impl<Config: config::Config> ExecuteXcm<Config::Call> for XcmExecutor<Config> {
 				vm.take_appendix()
 			}
 		}
-
+		log::info!("------------------- while end ------------------");
 		vm.post_execute(xcm_weight)
 	}
 }
@@ -221,11 +221,11 @@ impl<Config: config::Config> XcmExecutor<Config> {
 		let mut weight_used = xcm_weight.saturating_sub(self.total_surplus);
 
 		if !self.holding.is_empty() {
-			log::trace!(target: "xcm::execute_xcm_in_credit", "Trapping assets in holding register: {:?} (original_origin: {:?})", self.holding, self.original_origin);
+			log::info!(target: "xcm::execute_xcm_in_credit", "Trapping assets in holding register: {:?} (original_origin: {:?})", self.holding, self.original_origin);
 			let trap_weight = Config::AssetTrap::drop_assets(&self.original_origin, self.holding);
 			weight_used.saturating_accrue(trap_weight);
 		};
-
+		log::info!("--------------------- self.error: {:?} ----------------------",self.error);
 		match self.error {
 			None => Outcome::Complete(weight_used),
 			// TODO: #2841 #REALWEIGHT We should deduct the cost of any instructions following
