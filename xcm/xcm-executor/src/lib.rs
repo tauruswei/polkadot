@@ -227,11 +227,14 @@ impl<Config: config::Config> XcmExecutor<Config> {
 		};
 		log::info!("--------------------- self.error: {:?} ----------------------",self.error);
 		match self.error {
-			None => Outcome::Complete(weight_used),
+			None => {
+				log::info!("--------------------- self.error1: {:?} ----------------------",self.error);
+				Outcome::Complete(weight_used)
+			},
 			// TODO: #2841 #REALWEIGHT We should deduct the cost of any instructions following
 			// the error which didn't end up being executed.
 			Some((_i, e)) => {
-				log::debug!(target: "xcm::execute_xcm_in_credit", "Execution errored at {:?}: {:?} (original_origin: {:?})", _i, e, self.original_origin);
+				log::info!(target: "xcm::execute_xcm_in_credit", "Execution errored at {:?}: {:?} (original_origin: {:?})", _i, e, self.original_origin);
 				Outcome::Incomplete(weight_used, e)
 			},
 		}

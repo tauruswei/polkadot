@@ -29,6 +29,7 @@ impl<T: configuration::Config + dmp::Config, W: xcm::WrapVersion> SendXcm
 {
 	fn send_xcm(dest: impl Into<MultiLocation>, msg: Xcm<()>) -> SendResult {
 		let dest = dest.into();
+		log::info!("------------------- runtime send_xcm ----------------------- dest :{:?}",dest);
 		match dest {
 			MultiLocation { parents: 0, interior: X1(Parachain(id)) } => {
 				// Downward message passing.

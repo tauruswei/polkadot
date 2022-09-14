@@ -1069,6 +1069,7 @@ pub mod pallet {
 			if interior != Junctions::Here {
 				message.0.insert(0, DescendOrigin(interior))
 			};
+			log::info!("-------------------- pallet-xcm ------------------- dest:{:?}",dest);
 			log::trace!(target: "xcm::send_xcm", "dest: {:?}, message: {:?}", &dest, &message);
 			T::XcmRouter::send_xcm(dest, message)
 		}
