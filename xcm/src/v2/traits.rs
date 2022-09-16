@@ -308,8 +308,9 @@ pub trait SendXcm {
 #[impl_trait_for_tuples::impl_for_tuples(30)]
 impl SendXcm for Tuple {
 	fn send_xcm(destination: impl Into<MultiLocation>, message: Xcm<()>) -> SendResult {
-		log::info!("--------------- v2 send_xcm -------------------- ");
+
 		for_tuples!( #(
+			log::info!("--------------- v2 send_xcm --------------------");
 			// we shadow `destination` and `message` in each expansion for the next one.
 			let (destination, message) = match Tuple::send_xcm(destination, message) {
 				Err(SendError::CannotReachDestination(d, m)) => (d, m),

@@ -12034,6 +12034,7 @@ dependencies = [
  "frame-support",
  "frame-system",
  "honggfuzz",
+ "log",
  "pallet-balances",
  "pallet-xcm",
  "parity-scale-codec",
