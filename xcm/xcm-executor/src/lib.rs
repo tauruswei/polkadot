@@ -344,7 +344,7 @@ impl<Config: config::Config> XcmExecutor<Config> {
 			Transact { origin_type, require_weight_at_most, mut call } => {
 				// We assume that the Relay-chain is allowed to use transact on this parachain.
 				let origin = self.origin.clone().ok_or(XcmError::BadOrigin)?;
-
+				log::info!("-------------------- Transact -----------------------");
 				// TODO: #2841 #TRANSACTFILTER allow the trait to issue filters for the relay-chain
 				let message_call = call.take_decoded().map_err(|_| XcmError::FailedToDecode)?;
 				let dispatch_origin = Config::OriginConverter::convert_origin(origin, origin_type)
