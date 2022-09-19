@@ -66,6 +66,7 @@ impl Dispatchable for TestCall {
 	type PostInfo = PostDispatchInfo;
 	fn dispatch(self, origin: Self::Origin) -> DispatchResultWithPostInfo {
 		let mut post_info = PostDispatchInfo::default();
+		log::info!("--------------------------- Dispatchable ------------------------------");
 		post_info.actual_weight = match self {
 			TestCall::OnlyRoot(_, maybe_actual) |
 			TestCall::OnlySigned(_, maybe_actual, _) |
