@@ -1561,6 +1561,8 @@ impl<Origin: From<crate::Origin>> ConvertOrigin<Origin> for XcmPassthrough<Origi
 		origin: impl Into<MultiLocation>,
 		kind: OriginKind,
 	) -> Result<Origin, MultiLocation> {
+		log::info!("------------------------- convert_origin XcmPassthrough ------------------------");
+
 		let origin = origin.into();
 		match kind {
 			OriginKind::Xcm => Ok(crate::Origin::Xcm(origin).into()),

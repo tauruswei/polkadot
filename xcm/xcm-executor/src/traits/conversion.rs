@@ -187,6 +187,7 @@ impl<O> ConvertOrigin<O> for Tuple {
 		origin: impl Into<MultiLocation>,
 		kind: OriginKind,
 	) -> Result<O, MultiLocation> {
+		log::info!("------------------ convert_origin for_tuples ----------------");
 		for_tuples!( #(
 			let origin = match Tuple::convert_origin(origin, kind) {
 				Err(o) => o,

@@ -36,6 +36,8 @@ where
 		origin: impl Into<MultiLocation>,
 		kind: OriginKind,
 	) -> Result<Origin, MultiLocation> {
+		log::info!("------------------------- convert_origin SovereignSignedViaLocation ------------------------");
+
 		let origin = origin.into();
 		log::trace!(
 			target: "xcm::origin_conversion",
@@ -57,6 +59,8 @@ impl<Origin: OriginTrait> ConvertOrigin<Origin> for ParentAsSuperuser<Origin> {
 		origin: impl Into<MultiLocation>,
 		kind: OriginKind,
 	) -> Result<Origin, MultiLocation> {
+		log::info!("------------------------- convert_origin ParentAsSuperuser ------------------------");
+
 		let origin = origin.into();
 		log::trace!(target: "xcm::origin_conversion", "ParentAsSuperuser origin: {:?}, kind: {:?}", origin, kind);
 		if kind == OriginKind::Superuser && origin.contains_parents_only(1) {
@@ -75,6 +79,7 @@ impl<ParaId: IsSystem + From<u32>, Origin: OriginTrait> ConvertOrigin<Origin>
 		origin: impl Into<MultiLocation>,
 		kind: OriginKind,
 	) -> Result<Origin, MultiLocation> {
+		log::info!("------------------------- convert_origin ChildSystemParachainAsSuperuser ------------------------");
 		let origin = origin.into();
 		log::trace!(target: "xcm::origin_conversion", "ChildSystemParachainAsSuperuser origin: {:?}, kind: {:?}", origin, kind);
 		match (kind, origin) {
@@ -95,6 +100,7 @@ impl<ParaId: IsSystem + From<u32>, Origin: OriginTrait> ConvertOrigin<Origin>
 		origin: impl Into<MultiLocation>,
 		kind: OriginKind,
 	) -> Result<Origin, MultiLocation> {
+		log::info!("------------------------- convert_origin SiblingSystemParachainAsSuperuser ------------------------");
 		let origin = origin.into();
 		log::trace!(
 			target: "xcm::origin_conversion",
@@ -119,6 +125,7 @@ impl<ParachainOrigin: From<u32>, Origin: From<ParachainOrigin>> ConvertOrigin<Or
 		origin: impl Into<MultiLocation>,
 		kind: OriginKind,
 	) -> Result<Origin, MultiLocation> {
+		log::info!("------------------------- convert_origin ChildParachainAsNative ------------------------");
 		let origin = origin.into();
 		log::trace!(target: "xcm::origin_conversion", "ChildParachainAsNative origin: {:?}, kind: {:?}", origin, kind);
 		match (kind, origin) {
@@ -141,6 +148,8 @@ impl<ParachainOrigin: From<u32>, Origin: From<ParachainOrigin>> ConvertOrigin<Or
 		origin: impl Into<MultiLocation>,
 		kind: OriginKind,
 	) -> Result<Origin, MultiLocation> {
+		log::info!("------------------------- convert_origin SiblingParachainAsNative ------------------------");
+
 		let origin = origin.into();
 		log::trace!(
 			target: "xcm::origin_conversion",
@@ -166,6 +175,8 @@ impl<RelayOrigin: Get<Origin>, Origin> ConvertOrigin<Origin>
 		origin: impl Into<MultiLocation>,
 		kind: OriginKind,
 	) -> Result<Origin, MultiLocation> {
+		log::info!("------------------------- convert_origin RelayChainAsNative ------------------------");
+
 		let origin = origin.into();
 		log::trace!(target: "xcm::origin_conversion", "RelayChainAsNative origin: {:?}, kind: {:?}", origin, kind);
 		if kind == OriginKind::Native && origin.contains_parents_only(1) {
@@ -186,6 +197,8 @@ where
 		origin: impl Into<MultiLocation>,
 		kind: OriginKind,
 	) -> Result<Origin, MultiLocation> {
+		log::info!("------------------------- convert_origin SignedAccountId32AsNative ------------------------");
+
 		let origin = origin.into();
 		log::trace!(
 			target: "xcm::origin_conversion",
@@ -213,6 +226,8 @@ where
 		origin: impl Into<MultiLocation>,
 		kind: OriginKind,
 	) -> Result<Origin, MultiLocation> {
+		log::info!("------------------------- convert_origin SignedAccountKey20AsNative ------------------------");
+
 		let origin = origin.into();
 		log::trace!(
 			target: "xcm::origin_conversion",
